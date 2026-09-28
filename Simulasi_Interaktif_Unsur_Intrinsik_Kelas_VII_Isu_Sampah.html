@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Petualangan Unsur Intrinsik - Kelas VII</title>
+<style>
+:root{--ink:#24324a;--muted:#667085;--bg:#f5f7fb;--card:#fff;--primary:#6757d9;--primary2:#897bf0;--green:#16a085;--orange:#f39c12;--red:#df5b72;--line:#e5e8f0}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:Segoe UI,Arial,sans-serif;line-height:1.6}
+.app{max-width:1080px;margin:auto;padding:18px}
+.hero{background:linear-gradient(135deg,#4e43bd,#7969e9 55%,#4fc3a1);color:#fff;border-radius:24px;padding:28px;box-shadow:0 12px 30px #2e315a22}
+.badge{display:inline-block;padding:5px 11px;border-radius:99px;background:#ffffff2b;border:1px solid #ffffff55;font-size:13px}
+h1{font-size:clamp(28px,5vw,46px);line-height:1.1;margin:12px 0 8px}.hero p{max-width:800px;margin:5px 0}
+.identity{display:flex;gap:10px;flex-wrap:wrap;margin-top:17px}.identity input{padding:9px;border:0;border-radius:10px;width:160px}
+.progressbox{margin:18px 0}.progressline{height:10px;background:#e6e8f1;border-radius:99px;overflow:hidden}.progressline div{height:100%;width:0;background:linear-gradient(90deg,var(--primary),var(--green));transition:.3s}
+.progressmeta{display:flex;justify-content:space-between;color:var(--muted);font-size:13px;margin-bottom:6px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:23px;margin:15px 0;box-shadow:0 7px 22px #26334a0c}
+.stage{display:none}.stage.active{display:block}.stagehead{display:flex;gap:13px;align-items:flex-start}.num{min-width:42px;height:42px;border-radius:13px;background:#eeecff;color:var(--primary);display:grid;place-items:center;font-weight:800}.kicker{text-transform:uppercase;color:var(--primary);font-size:12px;font-weight:800;letter-spacing:.06em}
+h2{margin:2px 0 4px}.story{background:#fffaf0;border-left:5px solid var(--orange);padding:17px 19px;border-radius:12px;max-height:390px;overflow:auto}.story p{margin:0 0 12px}.quote{background:#f1efff;padding:12px 15px;border-radius:12px;font-style:italic;margin:12px 0}
+.options{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:11px;margin-top:14px}.option{border:2px solid var(--line);background:#fff;border-radius:14px;padding:13px;text-align:left;transition:.2s}.option:hover{border-color:var(--primary2);transform:translateY(-1px)}.option.selected{border-color:var(--primary);background:#f2f0ff}.option.correct{border-color:var(--green);background:#eafaf6}.option.wrong{border-color:var(--red);background:#fff0f3}
+.feedback{display:none;margin-top:13px;padding:12px 15px;border-radius:12px}.feedback.show{display:block}.feedback.ok{background:#eafaf6;border:1px solid #b9eadc}.feedback.no{background:#fff0f3;border:1px solid #f1bac5}
+.btns{display:flex;gap:9px;flex-wrap:wrap;margin-top:19px}.btn{padding:10px 16px;border-radius:11px;font-weight:700}.primary{background:var(--primary);color:#fff}.secondary{background:#edf0f6;color:var(--ink)}.success{background:var(--green);color:#fff}.warn{background:var(--orange);color:#fff}.btn:disabled{opacity:.45;cursor:not-allowed}
+.tip{background:#eef8ff;border:1px solid #cde8fb;padding:12px 14px;border-radius:11px;margin-top:12px;color:#31536e}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(175px,1fr));gap:11px}.mapcard{padding:15px;border-radius:15px;background:#f8f7ff;border:1px solid #e5e2ff}.mapcard strong{display:block;color:var(--primary);margin-bottom:3px}
+table{width:100%;border-collapse:collapse;margin-top:13px}th,td{border:1px solid var(--line);padding:9px;text-align:left;vertical-align:top}th{background:#f4f2ff}
+textarea{width:100%;min-height:82px;border:1px solid var(--line);border-radius:11px;padding:10px;resize:vertical}.reflect{margin:13px 0}
+.score{text-align:center;font-size:54px;font-weight:900;color:var(--primary)}.meter{height:14px;background:#e8eaf1;border-radius:99px;overflow:hidden}.meter div{height:100%;width:0;background:linear-gradient(90deg,var(--red),var(--orange),var(--green));transition:.7s}
+.hidden{display:none!important}.small{font-size:13px;color:var(--muted)}footer{text-align:center;color:var(--muted);padding:20px;font-size:13px}
+@media(max-width:620px){.app{padding:11px}.hero,.card{padding:18px}.identity input{width:100%}.options{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="hero">
+  <span class="badge">Bahasa Indonesia • SMP Kelas VII</span>
+  <h1>🌿 Petualangan Unsur Intrinsik</h1>
+  <p>Jelajahi cerita fantasi bertema alam Indonesia. Temukan bukti dalam cerita, analisis unsurnya, dan lihat bagaimana semua unsur saling membangun cerita.</p>
+  <div class="identity">
+    <input id="studentName" placeholder="Nama siswa">
+    <input id="studentClass" value="VII" placeholder="Kelas">
+  </div>
+</header>
+
+<div class="progressbox">
+  <div class="progressmeta"><span id="stageLabel">Tahap 1 dari 5</span><span id="scoreLabel">Skor: 0</span></div>
+  <div class="progressline"><div id="progress"></div></div>
+</div>
+
+<main>
+<section class="card stage active" id="stage1">
+  <div class="stagehead"><div class="num">1</div><div><div class="kicker">Kenali Cerita</div><h2>Masuk ke Dunia Fantasi</h2></div></div>
+  <p>Bacalah cerita berikut dengan teliti. Perhatikan **struktur cerita (orientasi, komplikasi, resolusi, koda)** sekaligus tokoh, peristiwa, latar, konflik, dan pesan yang muncul.</p>
+  <div class="story">
+    <p><b>🌊 Penjaga Teluk Cahaya</b></p>
+
+    <p><b>Orientasi — Awal Petualangan</b><br>
+    Di sebuah desa pesisir yang menghadap Teluk Tomini, tinggal seorang siswi kelas VII bernama Nara. Ia gemar berjalan di tepi pantai sambil mengumpulkan kerang untuk membuat hiasan. Suatu sore setelah hujan deras, Nara melihat pantai dipenuhi botol plastik, kantong makanan, dan potongan styrofoam yang terbawa arus. Di antara tumpukan sampah itu, ia menemukan sebuah kerang biru yang memancarkan cahaya lembut.</p>
+
+    <p>Ketika Nara menyentuh kerang tersebut, terdengar suara dari dalamnya. “Tolong kembalikan napasku sebelum Teluk Cahaya benar-benar tertutup.” Nara terkejut. Ia menoleh ke sekeliling, tetapi tidak ada siapa pun. Beberapa saat kemudian, seekor penyu kecil muncul dari balik batu dan berkata, “Kerang itu adalah kunci menuju dunia yang selama ini tersembunyi di bawah teluk.”</p>
+
+    <p><b>Komplikasi — Masalah Muncul</b><br>
+    Penyu itu membawa Nara menuju sebuah gua kecil di bawah tebing. Di dalam gua, air laut berubah menjadi biru berkilauan. Nara melihat kota bawah laut bernama <i>Arunika</i>. Dahulu, kota itu dijaga oleh Penjaga Teluk yang memastikan air tetap jernih dan makhluk laut dapat hidup dengan aman.</p>
+
+    <p>Namun, sampah dari daratan terus terbawa ke laut. Plastik yang menumpuk di dasar teluk menghalangi aliran air dan membuat terumbu karang kehilangan cahaya. Jika keadaan itu tidak berubah sebelum bulan purnama, <i>Arunika</i> akan kehilangan cahaya pelindungnya dan seluruh kehidupan di teluk akan membeku.</p>
+
+    <p>Nara ingin membantu, tetapi ia menghadapi masalah. Penjaga Teluk bernama Ranu mengatakan bahwa kerang biru hanya dapat mengaktifkan cahaya pelindung jika manusia di daratan mau mengubah kebiasaan mereka. “Aku bisa membersihkan laut ini,” kata Ranu, “tetapi aku tidak bisa menghentikan sampah yang terus datang dari daratan.”</p>
+
+    <p>Nara kemudian kembali ke desa. Ia mengajak teman-temannya, Dito dan Sari, untuk memeriksa sumber sampah. Mereka menemukan bahwa sebagian sampah berasal dari kebiasaan membuang sampah sembarangan di selokan. Ketika hujan turun, sampah terbawa ke sungai dan akhirnya masuk ke teluk. Akan tetapi, tidak semua warga percaya bahwa tindakan kecil mereka dapat memengaruhi keadaan laut.</p>
+
+    <p>Untuk membuktikannya, Nara dan teman-temannya membuat kegiatan “Satu Hari Tanpa Sampah Plastik”. Mereka memasang tempat sampah terpilah, membersihkan selokan, membuat poster, dan mengajak warga membawa wadah yang dapat digunakan kembali. Beberapa orang menolak pada awalnya. Bahkan, seorang pedagang berkata bahwa kegiatan itu hanya akan merepotkan.</p>
+
+    <p>Malam sebelum bulan purnama, hujan deras kembali turun. Sungai membawa sampah dalam jumlah besar menuju teluk. Nara, Dito, Sari, dan warga yang sudah ikut membantu berusaha menahan sampah dengan jaring sederhana. Saat mereka hampir menyerah, kerang biru di tangan Nara kembali bercahaya.</p>
+
+    <p><b>Resolusi — Masalah Teratasi</b><br>
+    Cahaya dari kerang menyebar seperti ribuan kunang-kunang di atas air. Sampah yang tersangkut perlahan terangkat ke permukaan sehingga warga dapat mengumpulkannya. Di bawah laut, Ranu dan para penjaga Arunika membersihkan terumbu karang yang tertutup sampah. Ketika bulan purnama muncul, air Teluk Tomini kembali jernih dan terumbu karang memancarkan cahaya warna-warni.</p>
+
+    <p>Nara kembali ke gua dan melihat kota Arunika bersinar. Ranu tersenyum. “Kerang itu bukan sumber kekuatan sebenarnya,” katanya. “Kekuatan sebenarnya berasal dari manusia yang mau bertanggung jawab atas tindakannya.” Setelah mengucapkan terima kasih, Ranu memberikan Nara sebuah biji karang kecil yang dapat tumbuh di tempat yang bersih.</p>
+
+    <p><b>Koda — Pesan Cerita</b><br>
+    Sejak hari itu, kegiatan menjaga lingkungan menjadi kebiasaan baru di desa Nara. Warga memilah sampah, mengurangi penggunaan plastik sekali pakai, dan rutin membersihkan saluran air. Nara tetap menyimpan kerang biru di kamarnya sebagai pengingat bahwa masalah besar dapat berubah ketika banyak orang melakukan tindakan kecil secara bersama-sama.</p>
+</div>
+  <div class="quote">💡 <b>Petunjuk:</b> Saat menganalisis cerita, carilah bukti dari teks. Jangan hanya menebak berdasarkan perasaan.</div>
+  <div class="btns"><button class="btn primary" onclick="go(2)">Mulai Analisis →</button></div>
+</section>
+
+<section class="card stage" id="stage2">
+  <div class="stagehead"><div class="num">2</div><div><div class="kicker">Temukan Unsurnya</div><h2>Analisis Satu per Satu</h2></div></div>
+  <p>Jawablah pertanyaan berikut. Pilih jawaban yang paling sesuai dengan bukti cerita.</p>
+  <div id="questionBox"></div>
+  <div class="btns">
+    <button class="btn secondary" id="prevQ" onclick="changeQ(-1)">← Sebelumnya</button>
+    <button class="btn warn" onclick="hint()">💡 Petunjuk</button>
+    <button class="btn primary" id="nextQ" onclick="changeQ(1)">Berikutnya →</button>
+  </div>
+  <div id="hintBox" class="tip hidden"></div>
+</section>
+
+<section class="card stage" id="stage3">
+  <div class="stagehead"><div class="num">3</div><div><div class="kicker">Hubungkan Unsur</div><h2>Bagaimana Unsur Cerita Bekerja Sama?</h2></div></div>
+  <p>Unsur intrinsik tidak berdiri sendiri. Coba lihat hubungan antara tokoh, konflik, alur, latar, dan amanat.</p>
+  <h3>🧩 Struktur Teks Fantasi</h3>
+  <div class="map">
+    <div class="mapcard"><strong>🌱 Orientasi</strong>Memperkenalkan Nara, desa pesisir, kerang ajaib, dan awal petualangan.</div>
+    <div class="mapcard"><strong>⚡ Komplikasi</strong>Masalah sampah mengancam Teluk Tomini dan dunia Arunika; Nara menghadapi penolakan warga.</div>
+    <div class="mapcard"><strong>✨ Resolusi</strong>Nara, teman-teman, dan warga bekerja bersama mengatasi sampah sehingga teluk kembali bersih.</div>
+    <div class="mapcard"><strong>💚 Koda</strong>Warga menjadikan menjaga lingkungan sebagai kebiasaan dan memahami tanggung jawab bersama.</div>
+  </div>
+  <h3>🔗 Hubungan Unsur Intrinsik</h3><div class="map">
+    <div class="mapcard"><strong>👧 Tokoh</strong>Nara, Dito, Sari, Ranu, warga, dan penyu menjadi bagian penting cerita.</div>
+    <div class="mapcard"><strong>⚡ Konflik</strong>Sampah dari daratan mencemari teluk dan mengancam Arunika.</div>
+    <div class="mapcard"><strong>🏝️ Latar</strong>Desa pesisir, Teluk Tomini, gua, dan Arunika membangun suasana realistis sekaligus fantastis.</div>
+    <div class="mapcard"><strong>🔄 Alur</strong>Penemuan kerang → masalah muncul → usaha bersama → masalah teratasi.</div>
+    <div class="mapcard"><strong>💚 Amanat</strong>Menjaga lingkungan adalah tanggung jawab bersama dan dapat dimulai dari tindakan kecil.</div>
+  </div>
+  <div class="quote">Pertanyaan: Jika tidak ada konflik, apakah cerita akan memiliki rangkaian peristiwa yang menarik? Mengapa?</div>
+  <div class="btns"><button class="btn secondary" onclick="go(2)">← Kembali</button><button class="btn primary" onclick="go(4)">Lanjut Analisis →</button></div>
+</section>
+
+<section class="card stage" id="stage4">
+  <div class="stagehead"><div class="num">4</div><div><div class="kicker">Tantangan Analisis</div><h2>Uji Pemahamanmu</h2></div></div>
+  <p>Gunakan cerita pada Tahap 1. Pilih jawaban yang paling tepat.</p>
+  <div id="challengeBox"></div>
+  <div class="btns">
+    <button class="btn warn" onclick="challengeHint()">💡 Petunjuk</button>
+    <button class="btn success" id="finishBtn" onclick="finishChallenge()" disabled>Selesai Tantangan</button>
+  </div>
+  <div id="challengeFeedback" class="feedback"></div>
+  <div id="challengeHint" class="tip hidden"></div>
+</section>
+
+<section class="card stage" id="stage5">
+  <div class="stagehead"><div class="num">5</div><div><div class="kicker">Kesimpulan & Refleksi</div><h2>Bagaimana Hasil Petualanganmu?</h2></div></div>
+  <div class="score" id="finalScore">0</div>
+  <p style="text-align:center">poin dari 100</p>
+  <div class="meter"><div id="meterFill"></div></div>
+  <p id="resultText" style="text-align:center;font-weight:700"></p>
+  <h3>📋 Peta Hasil Analisis</h3>
+  <div id="resultTable"></div>
+  <h3>🪞 Refleksi</h3>
+  <div class="reflect"><label>1. Unsur intrinsik apa yang paling mudah kamu temukan? Mengapa?</label><textarea placeholder="Tuliskan jawabanmu..."></textarea></div>
+  <div class="reflect"><label>2. Unsur intrinsik apa yang paling sulit kamu analisis?</label><textarea placeholder="Tuliskan jawabanmu..."></textarea></div>
+  <div class="reflect"><label>3. Bagaimana hubungan tokoh dan konflik dalam cerita?</label><textarea placeholder="Tuliskan jawabanmu..."></textarea></div>
+  <div class="reflect"><label>4. Bagaimana latar mendukung jalannya cerita fantasi?</label><textarea placeholder="Tuliskan jawabanmu..."></textarea></div>
+  <div class="reflect"><label>5. Apa yang kamu pelajari setelah menganalisis cerita ini?</label><textarea placeholder="Tuliskan jawabanmu..."></textarea></div>
+  <div class="btns"><button class="btn secondary" onclick="go(4)">← Kembali</button><button class="btn primary" onclick="window.print()">🖨️ Cetak Hasil</button><button class="btn success" onclick="location.reload()">↻ Mulai Lagi</button></div>
+</section>
+</main>
+<footer>Simulasi pembelajaran Bahasa Indonesia • Materi Unsur Intrinsik Teks Fantasi • Kelas VII</footer>
+</div>
+
+<script>
+// Data pembelajaran. Guru dapat mengubah teks, pilihan, dan kunci jawaban di bagian ini.
+const questions=[
+ {u:"Tema",q:"Tema utama yang paling tepat untuk cerita “Penjaga Teluk Cahaya” adalah ...",opts:["Persaingan menjadi penjaga laut","Kepedulian dan tanggung jawab terhadap lingkungan","Perjalanan mencari harta karun","Persahabatan antara manusia dan hewan"],a:1,why:"Cerita berpusat pada masalah sampah yang mencemari teluk serta usaha Nara, teman-temannya, dan warga untuk menjaga lingkungan."},
+ {u:"Tokoh & Penokohan",q:"Sifat Nara yang paling kuat terlihat dari tindakannya adalah ...",opts:["Peduli, berani, dan bertanggung jawab","Pemalas dan mudah menyerah","Sombong dan ingin dipuji","Takut dan tidak peduli"],a:0,why:"Nara berani menghadapi masalah, mencari sumber sampah, mengajak warga, dan terus berusaha meskipun awalnya ditolak."},
+ {u:"Alur",q:"Urutan peristiwa yang paling tepat adalah ...",opts:["Nara menemukan kerang → mengetahui masalah teluk → mengajak warga → sampah dibersihkan → lingkungan berubah","Warga membersihkan teluk → Nara menemukan kerang → Arunika muncul → masalah dimulai","Nara bertemu Ranu → teluk bersih → Nara menemukan sampah → warga menolak","Arunika hancur → Nara pulang → kerang ditemukan → warga mulai membuang sampah"],a:0,why:"Peristiwa bergerak maju dari penemuan kerang, munculnya masalah, usaha penyelesaian, hingga teluk kembali bersih."},
+ {u:"Latar",q:"Pasangan latar yang paling tepat berdasarkan cerita adalah ...",opts:["Istana dan padang pasir; tengah malam; menegangkan","Desa pesisir, Teluk Tomini, dan Arunika; sore hingga malam; menegangkan lalu penuh harapan","Sekolah dan pasar; pagi hari; lucu","Hutan dan gunung; siang hari; sedih"],a:1,why:"Cerita menyebut desa pesisir, Teluk Tomini, gua, dan kota bawah laut Arunika. Waktu dan suasana berubah dari sore, malam, hujan, hingga suasana penuh harapan."},
+ {u:"Sudut Pandang",q:"Sudut pandang yang digunakan dalam cerita adalah ...",opts:["Orang pertama pelaku utama","Orang kedua","Orang ketiga","Campuran aku dan kamu"],a:2,why:"Cerita menggunakan nama Nara dan kata ganti seperti “ia”, sehingga narator berada di luar cerita dan menggunakan sudut pandang orang ketiga."},
+ {u:"Konflik",q:"Konflik utama yang harus dihadapi Nara adalah ...",opts:["Nara ingin menjadi penjaga laut","Sampah dari daratan mencemari teluk dan mengancam kehidupan di Arunika","Nara ingin memiliki kerang biru untuk dirinya sendiri","Ranu tidak mau membantu manusia"],a:1,why:"Masalah utama berasal dari sampah yang terbawa dari daratan ke laut sehingga mengganggu aliran air, terumbu karang, dan kehidupan di Arunika."},
+ {u:"Gaya Bahasa",q:"Kalimat “Cahaya dari kerang menyebar seperti ribuan kunang-kunang di atas air” menggunakan gaya bahasa ...",opts:["Simile/perumpamaan","Personifikasi","Ironi","Repetisi"],a:0,why:"Ada kata pembanding “seperti” yang membandingkan cahaya kerang dengan ribuan kunang-kunang."},
+ {u:"Amanat",q:"Amanat yang paling sesuai dengan keseluruhan cerita adalah ...",opts:["Masalah lingkungan hanya dapat diselesaikan dengan sihir","Menjaga lingkungan merupakan tanggung jawab bersama dan dapat dimulai dari tindakan kecil","Manusia sebaiknya tidak mendekati laut","Hanya penjaga teluk yang bertugas menjaga kebersihan"],a:1,why:"Koda menegaskan bahwa warga mulai memilah sampah, mengurangi plastik, dan membersihkan saluran air. Cerita menunjukkan bahwa tindakan kecil bersama dapat membawa perubahan."}
+];
+
+const challenges=[
+ {q:"Bagian “Nara menemukan kerang biru ... dan mendengar suara dari dalamnya” termasuk bagian struktur ...",o:["Orientasi","Komplikasi","Resolusi","Koda"],a:0},
+ {q:"Bagian ketika diketahui bahwa sampah dari daratan mengancam Arunika merupakan bagian ...",o:["Orientasi","Komplikasi","Resolusi","Koda"],a:1},
+ {q:"Bagian ketika warga berhasil mengumpulkan sampah dan Teluk Tomini kembali jernih merupakan ...",o:["Orientasi","Komplikasi","Resolusi","Koda"],a:2},
+ {q:"Bagian “Sejak hari itu, kegiatan menjaga lingkungan menjadi kebiasaan baru di desa Nara” berfungsi sebagai ...",o:["Orientasi","Komplikasi","Resolusi","Koda"],a:3},
+ {q:"Bukti yang paling menunjukkan adanya isu lingkungan dalam cerita adalah ...",o:["Nara senang mengumpulkan kerang","Sampah terbawa melalui sungai dan mencemari teluk","Ranu tinggal di kota bawah laut","Nara menyimpan kerang di kamarnya"],a:1}
+];
+
+let stage=1,qIndex=0,answers=Array(questions.length).fill(null),challengeAnswers=Array(challenges.length).fill(null);
+let score=0;
+
+function go(n){
+ stage=n;
+ document.querySelectorAll(".stage").forEach(x=>x.classList.remove("active"));
+ document.getElementById("stage"+n).classList.add("active");
+ document.getElementById("stageLabel").textContent=`Tahap ${n} dari 5`;
+ document.getElementById("progress").style.width=((n-1)/4*100)+"%";
+ if(n===2)renderQuestion();
+ if(n===4)renderChallenges();
+ if(n===5)renderFinal();
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+function renderQuestion(){
+ const x=questions[qIndex];
+ let html=`<div class="small">Unsur ${qIndex+1} dari ${questions.length}: <b>${x.u}</b></div><h3>${x.q}</h3><div class="options">`;
+ x.opts.forEach((o,i)=>{
+   let cls=answers[qIndex]===i?"selected":"";
+   html+=`<button class="option ${cls}" onclick="answerQ(${i})">${String.fromCharCode(65+i)}. ${o}</button>`;
+ });
+ html+=`</div><div id="qfeedback" class="feedback"></div>`;
+ document.getElementById("questionBox").innerHTML=html;
+ document.getElementById("prevQ").disabled=qIndex===0;
+ document.getElementById("nextQ").textContent=qIndex===questions.length-1?"Selesai Tahap 2 →":"Berikutnya →";
+}
+function answerQ(i){
+ answers[qIndex]=i;
+ const x=questions[qIndex], fb=document.getElementById("qfeedback");
+ document.querySelectorAll("#questionBox .option").forEach((b,j)=>b.classList.toggle("selected",j===i));
+ if(i===x.a){fb.className="feedback show ok";fb.innerHTML="✅ <b>Benar!</b> "+x.why;}
+ else{fb.className="feedback show no";fb.innerHTML="❌ Belum tepat. "+x.why;}
+ updateScore();
+}
+function changeQ(d){
+ if(d>0 && answers[qIndex]===null){alert("Pilih jawaban terlebih dahulu.");return}
+ qIndex+=d;
+ if(qIndex>=questions.length){go(3);return}
+ if(qIndex<0)qIndex=0;
+ renderQuestion();
+}
+function hint(){
+ const hints=["Tanyakan: “Cerita ini paling banyak membahas apa?”","Perhatikan tindakan tokoh, bukan hanya penampilan mereka.","Perhatikan urutan awal, masalah, usaha tokoh, dan akhir cerita.","Cari keterangan tempat, waktu, dan suasana dalam teks.","Perhatikan apakah narator memakai “aku” atau menyebut tokoh dengan “ia/nama”.","Cari masalah yang harus diselesaikan tokoh.","Benda mati diberi kemampuan seperti manusia.","Amanat biasanya dapat ditemukan dari pesan yang tersirat atau bagian akhir cerita."];
+ const box=document.getElementById("hintBox");box.textContent="💡 "+hints[qIndex];box.classList.remove("hidden");
+}
+function renderChallenges(){
+ let html="";
+ challenges.forEach((x,qi)=>{
+  html+=`<div class="card" style="margin:12px 0;padding:17px"><b>${qi+1}. ${x.q}</b><div class="options">`;
+  x.o.forEach((o,i)=>html+=`<button class="option ${challengeAnswers[qi]===i?"selected":""}" onclick="answerChallenge(${qi},${i})">${String.fromCharCode(65+i)}. ${o}</button>`);
+  html+=`</div></div>`;
+ });
+ document.getElementById("challengeBox").innerHTML=html;
+ document.getElementById("finishBtn").disabled=challengeAnswers.includes(null);
+}
+function answerChallenge(q,i){challengeAnswers[q]=i;renderChallenges();document.getElementById("challengeFeedback").className="feedback";updateScore();}
+function challengeHint(){const box=document.getElementById("challengeHint");box.textContent="💡 Ingat: cari bukti langsung pada kutipan. Tanyakan, “Unsur apa yang sedang ditunjukkan oleh informasi ini?”";box.classList.remove("hidden")}
+function finishChallenge(){
+ const right=challengeAnswers.filter((a,i)=>a===challenges[i].a).length;
+ score=questions.reduce((s,x,i)=>s+(answers[i]===x.a?5:0),0)+right*5;
+ document.getElementById("challengeFeedback").className="feedback show ok";
+ document.getElementById("challengeFeedback").innerHTML=`🎉 Tantangan selesai! Kamu mendapat ${right} dari ${challenges.length} jawaban benar.`;
+ updateScore();
+ setTimeout(()=>go(5),500);
+}
+function updateScore(){
+ let s=questions.reduce((t,x,i)=>t+(answers[i]===x.a?5:0),0);
+ s+=challengeAnswers.reduce((t,a,i)=>t+(a===challenges[i].a?5:0),0);
+ score=s;document.getElementById("scoreLabel").textContent=`Skor: ${s}`;
+}
+function renderFinal(){
+ updateScore();
+ const pct=Math.round(score);
+ document.getElementById("finalScore").textContent=pct;
+ document.getElementById("meterFill").style.width=pct+"%";
+ let msg=pct>=85?"Hebat! Kamu sudah sangat baik menganalisis unsur intrinsik.":pct>=70?"Bagus! Pemahamanmu sudah berkembang. Coba periksa kembali unsur yang masih keliru.":"Tetap semangat! Baca kembali bukti dalam cerita dan coba lagi.";
+ document.getElementById("resultText").textContent=msg;
+ const rows=questions.map((x,i)=>`<tr><td><b>${x.u}</b></td><td>${answers[i]===x.a?"✅ Benar":"❌ Perlu ditinjau"}</td><td>${x.why}</td></tr>`).join("");
+ document.getElementById("resultTable").innerHTML=`<table><thead><tr><th>Unsur</th><th>Hasil</th><th>Catatan</th></tr></thead><tbody>${rows}</tbody></table>`;
+}
+</script>
+</body>
+</html>
